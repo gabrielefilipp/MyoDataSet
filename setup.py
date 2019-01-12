@@ -8,7 +8,7 @@ Usage:
 from setuptools import setup
 
 APP = ['main.py']
-DATA_FILES = ['images/icon.icns']
+DATA_FILES = ['images/icon.icns', 'images/logo.png']
 OPTIONS = {'iconfile': '/Users/gabrielefilipponi/PycharmProjects/MyoDataset/images/icon.icns'}
 
 setup(
