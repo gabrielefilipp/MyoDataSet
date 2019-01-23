@@ -13,8 +13,7 @@ WIDTH = 560
 ll_ss = "QGroupBox {border: 1px solid gray;border-radius: 9px;margin-top: 0.5em;} QGroupBox::title {subcontrol-origin: margin;left: 10px;padding: 0 3px 0 3px;}"
 ll_ss_txt = "border: 0.5px solid;border-radius:8px;background-color:palette(base);border-color: rgb(128, 128, 128);"
 
-gestures_json = ["right", "ok", "pistol", "point", "left", "three", "rabbit", "scissors", "fist", "five"]
-gestures_csv = ["fist", "five", "left", "ok", "pistol", "point", "rabbit", "right", "scissors", "three"]
+gestures_list = ["fist", "five", "left", "ok", "pistol", "point", "rabbit", "right", "scissors", "three"]
 
 class KerasWindow(QMainWindow):
 
@@ -135,7 +134,7 @@ class KerasWindow(QMainWindow):
         x = 15
         y = 30
         self.prediction_bars = []
-        for g in gestures_csv:
+        for g in gestures_list:
             lbl = QLabel(gesture_group)
             lbl.setText(g + ":")
             lbl.setGeometry(x, y, 100, 25)
@@ -229,8 +228,8 @@ class KerasWindow(QMainWindow):
         self.rec_con_color.repaint()
 
         x = []
-        for p in range(8):
-            for i in range(600):
+        for i in range(600):
+            for p in range(8):
                 x.append(self.emg[i][p])
 
         x = np.reshape(x, [1, 600, 8])
