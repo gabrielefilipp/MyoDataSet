@@ -204,7 +204,7 @@ class MainWindow(QMainWindow):
         self.model = QStringListModel()
         self.listview.setModel(self.model)
 
-        self.list_data_for_set_and_gesture("train", "left")
+        self.list_data_for_set_and_gesture(self.project["sets"][0], self.project["gestures"][0])
 
         self.add_log("Loading dataset...")
         total = 0

@@ -13,4 +13,4 @@ class GestureListView(QListView):
         super().keyPressEvent(event)
         if self.currentIndex():
             if event.key() == 16777219:
-                self.model().removeRow(int(self.currentIndex()))
+                self.model().removeRow(int(self.currentIndex().row()))

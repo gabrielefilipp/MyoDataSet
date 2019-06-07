@@ -1,6 +1,7 @@
 from PyQt5.QtCore import QSize
 from PyQt5.QtWidgets import *
 from GestureListView import GestureListView
+from MainWindow import MainWindow
 import json
 import os
 
@@ -110,7 +111,7 @@ class NewProjectWindow(QMainWindow):
 
         cancel_btn = QPushButton(self)
         cancel_btn.setText("Cancel")
-        cancel_btn.clicked.connect(self.close)
+        cancel_btn.clicked.connect(self.closeAndShowParent)
         cancel_btn.setGeometry(WIDTH - 115, group_data_set.y() + group_data_set.height() + 15, 100, 30)
         cancel_btn.setStyleSheet("background-color: red;color: white; border: none; border-radius:5px;")
 
@@ -134,6 +135,10 @@ class NewProjectWindow(QMainWindow):
         self.gestures_list.setStyleSheet("border: none;border-radius:8px;background-color:palette(base);")
         self.gestures_list.setGeometry(370, 125, 210, 125)
 
+    def closeAndShowParent(self):
+        self.parent().show()
+        self.close()
+
     def add_gesture(self):
         for i in range(self.gestures_list.model().rowCount()):
             if (self.gestures_list.model().index(i).data() == self.add_gesture_txt.text()):
@@ -141,6 +146,7 @@ class NewProjectWindow(QMainWindow):
         self.gestures_list.model().insertRow(self.gestures_list.model().rowCount())
         index = self.gestures_list.model().index(self.gestures_list.model().rowCount() - 1)
         self.gestures_list.model().setData(index, self.add_gesture_txt.text())
+        self.add_gesture_txt.setText("")
 
     def set_check_state_changed(self):
         sum = 0
@@ -192,3 +198,5 @@ class NewProjectWindow(QMainWindow):
                 json.dump(project, outfile)
 
             self.close()
+            w = MainWindow(self.parent(), dis)
+            w.show()
